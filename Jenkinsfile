@@ -2,10 +2,18 @@ pipeline {
    agent any
 
    stages {
-      stage('Hello') {
+      stage('build') {
          steps {
-            echo 'Hello World Form Github'
+            echo 'build'
          }
       }
+   }
+
+   post {
+   	always {
+   		mail to 'liruirui1992@126.coas Writablem',
+   			subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+   			body: "${env.BUILD_URL} has result ${currentBuild.result}"
+   	}
    }
 }
